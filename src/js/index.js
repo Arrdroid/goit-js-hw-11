@@ -1,5 +1,7 @@
 import axios from "axios";
 import { URL, OPTIONS, serviceRequest } from "./api-set.js";
+import _ from 'lodash';
+
 
 const inputField = document.getElementById("search-input");
 const searchBtn = document.querySelector(".search-btn");
@@ -7,17 +9,19 @@ const searchBtn = document.querySelector(".search-btn");
 try {
   let requestToFind = null;
 
-  inputField.addEventListener("input", _.debounce((event) => {
-    const requestToFind = event.currentTarget.value.trim();
-  }, 300)
-  );
-  console.log(requestToFind);
-  console.dir(inputField);
+  async function gettingReady() {
+    inputField.addEventListener("input", _.debounce((event) => {
+      requestToFind = inputField.value;
+      console.log(requestToFind);
+    }, 400));
 
-} catch (error) {
+    OPTIONS.changeValue(requestToFind);
+    await serviceRequest();
   
+  }
+} catch (error) {
+  console.log(error);
 }
 
-
-
+gettingReady();
 
