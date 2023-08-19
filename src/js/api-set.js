@@ -11,13 +11,15 @@ export const OPTIONS = {
   // page: page,
   per_page: 40,
   changeValue(requestToFind) {
-    this.key = requestToFind;
+    this.q = requestToFind;
   }
 };
 
 export async function serviceRequest() {
   try {
-    const response = await axios.get(`${URL}${OPTIONS}`);
+    const response = await axios.get(`${URL}`, {
+      params: OPTIONS
+    });
     console.log(response);
   } catch (error) {
     console.log(error);
