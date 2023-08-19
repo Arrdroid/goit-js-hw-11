@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const URL = "https://pixabay.com/api/";
+export const URL = "https://pixabay.com/api/";
 
-const OPTIONS = {
+export const OPTIONS = {
   key: "38931090-55c6b7c2dc99483da7553cf12",
   q: null,
   image_type: "photo",
@@ -15,13 +15,12 @@ const OPTIONS = {
   }
 };
 
-async function serviceRequest() {
+export async function serviceRequest() {
   try {
     const response = await axios.get(`${URL}${OPTIONS}`);
     console.log(response);
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }
 
-export default { URL, OPTIONS, serviceRequest };
