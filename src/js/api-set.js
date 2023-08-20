@@ -4,11 +4,11 @@ export const URL = "https://pixabay.com/api/";
 
 export const OPTIONS = {
   key: "38931090-55c6b7c2dc99483da7553cf12",
-  q: null,
+  q: "",
   image_type: "photo",
   orientation: "horizontal",
   safesearch: true,
-  // page: page,
+  page: 1,
   per_page: 40,
   changeValue(requestToFind) {
     this.q = requestToFind;

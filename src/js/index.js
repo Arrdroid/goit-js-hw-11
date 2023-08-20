@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { OPTIONS, serviceRequest } from './api-set.js'; 
 import _ from 'lodash';
 
@@ -6,11 +5,11 @@ const inputField = document.getElementById('search-input');
 const searchBtn = document.querySelector('.search-btn');
 const totalForm = document.getElementById("search-form");
 export const renderUl = document.querySelector(".photo-ul");
+let requestToFind = "";
 
 gettingReady();
 async function gettingReady() {
   try {
-    let requestToFind = null;
 
     inputField.addEventListener(
       'input',
