@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { URL, OPTIONS, serviceRequest, markupRenderer } from './api-set.js'; 
+import { URL, OPTIONS, serviceRequest, renderResult } from './api-set.js'; 
 import _ from 'lodash';
 
 const inputField = document.getElementById('search-input');
@@ -27,8 +27,7 @@ async function gettingReady() {
       serviceRequest();
     });
 
-    await markupRenderer();
-    console.log(markupRenderer);
+    
     renderUl.insertAdjacentHTML("beforeend", renderResult);
 
   } catch (error) {
