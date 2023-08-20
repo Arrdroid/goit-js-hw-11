@@ -4,7 +4,9 @@ import _ from 'lodash';
 
 const inputField = document.getElementById('search-input');
 const searchBtn = document.querySelector('.search-btn');
+const totalForm = document.getElementById("search-form");
 
+gettingReady();
 async function gettingReady() {
   try {
     let requestToFind = null;
@@ -19,7 +21,7 @@ async function gettingReady() {
 
     OPTIONS.changeValue(requestToFind);
 
-    searchBtn.addEventListener('submit', (e) => {
+    totalForm.addEventListener('submit', (e) => {
       e.preventDefault();
       serviceRequest();
     });
@@ -28,4 +30,4 @@ async function gettingReady() {
   }
 }
 
-gettingReady();
+

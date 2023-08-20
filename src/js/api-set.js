@@ -21,6 +21,7 @@ export async function serviceRequest() {
       params: OPTIONS
     });
     console.log(response);
+    return response.then(info => (console.log(info)));
   } catch (error) {
     console.log(error);
   }
