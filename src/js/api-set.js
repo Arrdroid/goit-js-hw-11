@@ -17,13 +17,52 @@ export const OPTIONS = {
 
 export async function serviceRequest() {
   try {
-    const response = await axios.get(`${URL}`, {
+    const {data} = await axios.get(`${URL}`, {
       params: OPTIONS
     });
-    console.log(response);
-    return response.then(info => (console.log(info)));
-  } catch (error) {
+    console.log(data);
+    return data;
+    
+      } catch (error) {
     console.log(error);
   }
 }
 
+export function markupRenderer(data) {
+  console.log(data);
+  const {hits} = data;
+    
+    hits.map(
+      (e) =>
+        `
+        <div class="photo-element">
+          <img src="${e.webformatURL}" alt="${e.tags}" 
+            class="regular-img" loading="lazy" />
+          <ul class="photo-info">
+
+            <li class = "photo-desc">
+            <b>Likes</b>
+            <p>${e.likes}</p>
+            </li>
+            
+            <li class = "photo-desc">
+            <b>Views:</b>
+            <p>${e.views}</p>
+            </li>
+
+            <li class = "photo-desc">
+            <b>Comments: </b>
+            <p>${e.comments}</p>
+            </li>
+
+            <li class = "photo-desc">
+            <b>Downloads: </b>
+            <p>${e.downloads}</p>
+            </li>
+
+        </ul>
+      </div>
+      `
+  ).join("");
+  
+}

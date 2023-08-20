@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { URL, OPTIONS, serviceRequest } from './api-set.js'; 
+import { URL, OPTIONS, serviceRequest, markupRenderer } from './api-set.js'; 
 import _ from 'lodash';
 
 const inputField = document.getElementById('search-input');
 const searchBtn = document.querySelector('.search-btn');
 const totalForm = document.getElementById("search-form");
+const renderUl = document.querySelector(".photo-ul");
 
 gettingReady();
 async function gettingReady() {
@@ -16,7 +17,7 @@ async function gettingReady() {
       _.debounce(event => {
         requestToFind = inputField.value;
         console.log(requestToFind);
-      }, 400)
+      }, 500)
     );
 
     OPTIONS.changeValue(requestToFind);
@@ -25,6 +26,11 @@ async function gettingReady() {
       e.preventDefault();
       serviceRequest();
     });
+
+    await markupRenderer();
+    console.log(markupRenderer);
+    renderUl.insertAdjacentHTML("beforeend", renderResult);
+
   } catch (error) {
     console.log(error);
   }
