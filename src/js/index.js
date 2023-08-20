@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { URL, OPTIONS, serviceRequest, renderResult } from './api-set.js'; 
+import { OPTIONS, serviceRequest } from './api-set.js'; 
 import _ from 'lodash';
 
 const inputField = document.getElementById('search-input');
 const searchBtn = document.querySelector('.search-btn');
 const totalForm = document.getElementById("search-form");
-const renderUl = document.querySelector(".photo-ul");
+export const renderUl = document.querySelector(".photo-ul");
 
 gettingReady();
 async function gettingReady() {
@@ -28,7 +28,7 @@ async function gettingReady() {
     });
 
     
-    renderUl.insertAdjacentHTML("beforeend", renderResult);
+    
 
   } catch (error) {
     console.log(error);

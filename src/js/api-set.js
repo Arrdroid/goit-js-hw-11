@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { renderUl } from "./index.js";
 export const URL = "https://pixabay.com/api/";
 
 export const OPTIONS = {
@@ -15,7 +15,7 @@ export const OPTIONS = {
   }
 };
 
-export const renderResult = null;
+let renderResult = "";
 
 export async function serviceRequest() {
   try {
@@ -24,7 +24,7 @@ export async function serviceRequest() {
     });
     console.log(data);
     
-    return renderResult = data.hits
+    renderResult = data.hits
               .map(
                 (e) =>
                 `
@@ -57,11 +57,13 @@ export async function serviceRequest() {
               </div>
               `
           ).join("");
-
-
+                
+    return fillMarkup();
       } catch (error) {
     console.log(error);
   }
 }
 
-
+function fillMarkup() {
+  renderUl.insertAdjacentHTML("beforeend", renderResult);
+}
