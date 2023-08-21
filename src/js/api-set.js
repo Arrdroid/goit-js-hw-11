@@ -19,9 +19,8 @@ let renderResult = "";
 
 export async function serviceRequest() {
   try {
-    const {data} = await axios.get(`${URL}`, {
-      params: OPTIONS
-    });
+    const {data} = await axios.get(`${URL}?key=${OPTIONS.key}&q=${OPTIONS.q}&image_type=${OPTIONS.image_type}&orientation=${OPTIONS.orientation}&safesearch=${OPTIONS.safesearch}&page=${OPTIONS.page}&per_page=${OPTIONS.per_page}`);
+
     console.log(data);
     
     renderResult = data.hits
