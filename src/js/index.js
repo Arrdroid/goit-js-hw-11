@@ -17,13 +17,13 @@ totalForm.addEventListener('submit', (e) => {
 
   console.dir(e.currentTarget.elements.searchQuery.value.trim());
   inputvalue = e.currentTarget.elements.searchQuery.value.trim();
-  if (!inputvalue) {
-    renderReset();
-    emptyResp();
-    return
-  } else {
-    succResp();
-  }
+  // if (!inputvalue) {
+  //   renderReset();
+  //   emptyField();
+  //   return
+  // } else {
+  //   succResp();
+  // }
 
   gettingReady(inputvalue);
 });
@@ -35,11 +35,20 @@ async function gettingReady(inputvalue, page = 1) {
     console.log(response);
     let expectedStamp = response.data.hits;
     console.log(expectedStamp);
-
+    
+    if (!inputvalue) {
+      renderReset();
+      emptyField();
+      return
+    } else if (!inputvalue && expectedStamp === []) {
+      emptyResp(); 
+      return
+    } else {
+    succResp();
+    }
     
     fillMarkup(createMarkup(expectedStamp));
-    
-    
+
   } catch (error) {
     console.log(error);
   }
@@ -54,7 +63,7 @@ function renderReset() {
   renderUl.innerHTML = "";
 }
 
-function emptyResp() {
+function emptyField() {
   Notiflix.Notify.failure('Warning! Do not leave search area empty!');
 }
 
@@ -62,3 +71,6 @@ function succResp() {
   Notiflix.Notify.success('I have found some images on your request!');
 }
 
+function emptyResp() {
+  Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+}
