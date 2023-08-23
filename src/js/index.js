@@ -5,7 +5,7 @@ import Notiflix from 'notiflix';
 
 
 // const inputField = document.getElementById('search-input');
-// const searchBtn = document.querySelector('.search-btn');
+const secondSearchBtn = document.querySelector('js-second-search');
 const totalForm = document.getElementById("search-form");
 export const renderUl = document.querySelector(".photo-ul");
 
@@ -20,6 +20,12 @@ totalForm.addEventListener('submit', (e) => {
 
 
   gettingReady(inputvalue);
+
+  secondSearchBtn.addEventListener("click",() => {
+  page += 1;
+  gettingReady(inputvalue, page);
+  })
+
 });
 
 
@@ -49,6 +55,7 @@ async function gettingReady(inputvalue, page = 1) {
 }
 
 
+
 function fillMarkup(markup) {
   renderUl.insertAdjacentHTML("beforeend", markup);
 }
@@ -56,6 +63,8 @@ function fillMarkup(markup) {
 function renderReset() {
   renderUl.innerHTML = "";
 }
+
+
 
 function emptyField() {
   Notiflix.Notify.failure('Warning! Do not leave search area empty!');

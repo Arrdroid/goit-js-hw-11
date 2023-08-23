@@ -116,8 +116,6 @@ a {
 
   padding: 8px 24px;
 
-  
-
   background-color: rgb(252, 218, 0);
   color: rgb(61, 1, 159);
 
@@ -135,15 +133,6 @@ a {
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-@media screen and (min-width: 424px) {
-  .css-btn {
- 
-  }
-}
-
-
-
 
 
 .container {
@@ -176,8 +165,8 @@ a {
 }
 
 .general {
-  padding-top: 50px;
-  padding-bottom: 100px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .thumb-list {
@@ -239,3 +228,31 @@ a {
   letter-spacing: 0.02em;
 }
 
+.load-more {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 16px;
+
+margin-right: auto;
+margin-left: auto;
+margin-bottom: 25px;
+
+max-width: 165px;
+max-height: 40px;
+
+padding: 8px 24px;
+
+background-color: rgb(252, 218, 0);
+color: rgb(61, 1, 159);
+
+font-family: inherit;
+font-weight: 500;
+font-size: 16px;
+line-height: 1.2;
+letter-spacing: 0.02em;
+border-radius: 4px;
+
+cursor: pointer;
+border: none;
+}
