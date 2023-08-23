@@ -17,13 +17,7 @@ totalForm.addEventListener('submit', (e) => {
 
   console.dir(e.currentTarget.elements.searchQuery.value.trim());
   inputvalue = e.currentTarget.elements.searchQuery.value.trim();
-  // if (!inputvalue) {
-  //   renderReset();
-  //   emptyField();
-  //   return
-  // } else {
-  //   succResp();
-  // }
+
 
   gettingReady(inputvalue);
 });
@@ -35,12 +29,12 @@ async function gettingReady(inputvalue, page = 1) {
     console.log(response);
     let expectedStamp = response.data.hits;
     console.log(expectedStamp);
-    
+    let numericResp = response.data.total;
     if (!inputvalue) {
       renderReset();
       emptyField();
       return
-    } else if (!inputvalue && expectedStamp === []) {
+    } else if (inputvalue && numericResp === 0) {
       emptyResp(); 
       return
     } else {

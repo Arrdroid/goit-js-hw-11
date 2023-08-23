@@ -7,18 +7,25 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        id="search-input"
-        placeholder="Search images..."
-      />
-      <button type="submit" class="search-btn">Search</button>
-    </form>
+    <header class="header">
+      <form class="search-form css-form" id="search-form">
+        <input
+          type="text"
+          name="searchQuery"
+          autocomplete="off"
+          id="search-input"
+          placeholder="Search images..."
+          class="input-view"
+        />
+        <button type="submit" class="search-btn">Search</button>
+      </form>
+    </header>
 
-    <div class="photo-ul"></div>
+    <section class="general">
+      <div class="container">
+        <ul class="photo-ul thumb-list list"></ul>
+      </div>
+    </section>
 
     <script src="./js/index.js" type="module"></script>
   </body>
