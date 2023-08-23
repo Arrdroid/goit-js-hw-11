@@ -228,6 +228,7 @@ a {
   letter-spacing: 0.02em;
 }
 
+.load-less {display: none;}
 .load-more {
 display: flex;
 justify-content: center;

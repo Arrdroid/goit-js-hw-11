@@ -1,4 +1,4 @@
-import { serviceRequest } from './api-set.js';
+import { serviceRequest, ONPAGE } from './api-set.js';
 import { createMarkup } from './markup.js';
 import _ from 'lodash';
 import Notiflix from 'notiflix';
@@ -10,6 +10,10 @@ export const renderUl = document.querySelector('.photo-ul');
 
 let inputvalue = null;
 let page = 1;
+let expectedStamp = null;
+    secondSearchBtn.classList.add("load-less");
+
+
 
 totalForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -30,9 +34,14 @@ async function gettingReady(inputvalue, page = 1) {
   try {
     const response = await serviceRequest(inputvalue, page);
     console.log(response);
-    let expectedStamp = response.data.hits;
+    expectedStamp = response.data.hits;
     console.log(expectedStamp);
     let numericResp = response.data.total;
+
+    if (response.data.totalHits !== 0) {
+      secondSearchBtn.classList.replace("load-less", "load-more");
+    }
+    
     if (!inputvalue) {
       renderReset();
       emptyField();
@@ -40,10 +49,15 @@ async function gettingReady(inputvalue, page = 1) {
     } else if (inputvalue && numericResp === 0) {
       emptyResp();
       return;
+    } else if (Math.round(response.data.totalHits/ONPAGE) === page) {
+      secondSearchBtn.classList.replace("load-more", "load-less");
+      endOfSearch();
+      return
     } else {
       succResp();
     }
 
+    
     fillMarkup(createMarkup(expectedStamp));
   } catch (error) {
     console.log(error);
@@ -70,4 +84,8 @@ function emptyResp() {
   Notiflix.Notify.failure(
     'Sorry, there are no images matching your search query. Please try again.'
   );
+}
+
+function endOfSearch() {
+  Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
 }
