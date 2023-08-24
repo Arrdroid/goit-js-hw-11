@@ -40,8 +40,7 @@ async function gettingReady(inputvalue, page = 1) {
       secondSearchBtn.classList.replace("load-less", "load-more");
     } 
 
-    
-    if (!inputvalue) {
+     if (!inputvalue) {
       renderReset();
       emptyField();
       return;
