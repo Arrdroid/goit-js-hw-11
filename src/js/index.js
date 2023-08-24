@@ -36,26 +36,28 @@ async function gettingReady(inputvalue, page = 1) {
     let numericResp = response.data.total;
     totalHits = response.data.totalHits;
 
-    if (totalHits !== 0) {
-      secondSearchBtn.classList.replace("load-less", "load-more");
-    } 
-
-     if (!inputvalue) {
+    
+    if ((page * ONPAGE) >= (totalHits)) {
+      secondSearchBtn.classList.remove("load-more");
+      secondSearchBtn.classList.add("load-more");
+      endOfSearch();
+      return
+    } else if (!inputvalue) {
       renderReset();
       emptyField();
       return;
     } else if (inputvalue && numericResp === 0) {
       emptyResp();
       return;
-    } else if ((page * ONPAGE) >= totalHits) {
-      secondSearchBtn.classList.replace("load-more", "load-less");
-      endOfSearch();
-      return
     } else {
       succResp();
     }
-    console.log(ONPAGE);
     
+    if (totalHits !== 0) {
+      secondSearchBtn.classList.add("load-more");
+      secondSearchBtn.classList.remove("load-less");
+    } 
+
     fillMarkup(createMarkup(expectedStamp));
   } catch (error) {
     console.log(error);
