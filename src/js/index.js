@@ -3,7 +3,6 @@ import { createMarkup } from './markup.js';
 import _ from 'lodash';
 import Notiflix from 'notiflix';
 
-// const inputField = document.getElementById('search-input');
 const secondSearchBtn = document.querySelector('.js-second-search');
 const totalForm = document.getElementById('search-form');
 export const renderUl = document.querySelector('.photo-ul');
@@ -11,9 +10,7 @@ export const renderUl = document.querySelector('.photo-ul');
 let inputvalue = null;
 let page = 1;
 let expectedStamp = null;
-    secondSearchBtn.classList.add("load-less");
-
-
+let totalHits = null;
 
 totalForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -37,10 +34,12 @@ async function gettingReady(inputvalue, page = 1) {
     expectedStamp = response.data.hits;
     console.log(expectedStamp);
     let numericResp = response.data.total;
+    totalHits = response.data.totalHits;
 
-    if (response.data.totalHits !== 0) {
+    if (totalHits !== 0) {
       secondSearchBtn.classList.replace("load-less", "load-more");
-    }
+    } 
+
     
     if (!inputvalue) {
       renderReset();
@@ -49,7 +48,7 @@ async function gettingReady(inputvalue, page = 1) {
     } else if (inputvalue && numericResp === 0) {
       emptyResp();
       return;
-    } else if (Math.round(response.data.totalHits/ONPAGE) === page) {
+    } else if ((page * ONPAGE) >= totalHits) {
       secondSearchBtn.classList.replace("load-more", "load-less");
       endOfSearch();
       return
