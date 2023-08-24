@@ -22,41 +22,43 @@ totalForm.addEventListener('submit', e => {
   gettingReady(inputvalue);
 });
 
-  secondSearchBtn.addEventListener('click', () => {
-    page += 1;
-    gettingReady(inputvalue, page);
-  });
+secondSearchBtn.addEventListener('click', () => {
+  page += 1;
+  gettingReady(inputvalue, page);
+});
 
 async function gettingReady(inputvalue, page = 1) {
+  secondSearchBtn.classList.remove('load-more');
+  secondSearchBtn.classList.add('load-less');
+
+  if (!inputvalue) {
+    renderReset();
+    emptyField();
+    return;
+  }
+
   try {
     const response = await serviceRequest(inputvalue, page);
-    console.log(response);
     expectedStamp = response.data.hits;
-    console.log(expectedStamp);
-    let numericResp = response.data.total;
     totalHits = response.data.totalHits;
 
-    
-    if ((page * ONPAGE) >= (totalHits)) {
-      secondSearchBtn.classList.remove("load-more");
-      secondSearchBtn.classList.add("load-more");
-      endOfSearch();
-      return
-    } else if (!inputvalue) {
-      renderReset();
-      emptyField();
-      return;
-    } else if (inputvalue && numericResp === 0) {
+    if (page * ONPAGE <= totalHits) {
+      console.log(123);
+      secondSearchBtn.classList.add('load-more');
+      secondSearchBtn.classList.remove('load-less');
+    }
+
+    if (totalHits === 0) {
       emptyResp();
       return;
     } else {
       succResp();
     }
-    
-    if (totalHits !== 0) {
-      secondSearchBtn.classList.add("load-more");
-      secondSearchBtn.classList.remove("load-less");
-    } 
+
+    // if (totalHits !== 0) {
+    //   secondSearchBtn.classList.add("load-more");
+    //   secondSearchBtn.classList.remove("load-less");
+    // }
 
     fillMarkup(createMarkup(expectedStamp));
   } catch (error) {
@@ -87,5 +89,7 @@ function emptyResp() {
 }
 
 function endOfSearch() {
-  Notiflix.Notify.failure("We're sorry, but you've reached the end of search results.");
+  Notiflix.Notify.failure(
+    "We're sorry, but you've reached the end of search results."
+  );
 }
