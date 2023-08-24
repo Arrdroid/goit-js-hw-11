@@ -54,7 +54,7 @@ async function gettingReady(inputvalue, page = 1) {
     } else {
       succResp();
     }
-
+    console.log(ONPAGE);
     
     fillMarkup(createMarkup(expectedStamp));
   } catch (error) {
