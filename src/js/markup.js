@@ -11,7 +11,7 @@ export function createMarkup(array) {
                   <ul class="thumb-box link">
 
                     <li class = "photo-desc list">
-                    <h2 class="mainsection-title">Likes</h2>
+                    <h2 class="mainsection-title">Likes:</h2>
                     <p class="mainsection-item">${e.likes}</p>
                     </li>
                     
